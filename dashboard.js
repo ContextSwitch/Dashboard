@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const routes = require('./controllers');
 const staticAssetsPath = path.resolve(__dirname, 'build');
+require('./models');
 
 app.engine('html', require('ejs').renderFile);
 app.use('/', routes); //Main entry point
