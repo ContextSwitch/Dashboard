@@ -4,6 +4,7 @@ import RSS from "../presentational/RSS";
 class RssContainer extends Component {
   constructor() {
     super();
+    this.initialize();
     this.state = {
       seo_title: ""
     };
@@ -13,6 +14,8 @@ class RssContainer extends Component {
     this.setState({ [event.target.id]: event.target.value });
   }
   render() {
+
+
     const { seo_title } = this.state;
     return (
       <form id="article-form">
@@ -26,6 +29,13 @@ class RssContainer extends Component {
         />
       </form>
     );
+  }
+  initialize() {
+    let feeds = fetch('http://54.210.221.137:8000/getFeed?feedId=1').then( results => {
+	console.log('results = ');
+	console.log(results);
+	return results;
+    });
   }
 }
 export default RssContainer;
