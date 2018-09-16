@@ -17,4 +17,11 @@ router.get('/getFeed', async (req, res) => {
 
 });
 
+router.get('/getAllFeeds', async (req, res) => {
+
+    let feeds = await FeedFactory.loadAll();
+
+    res.send(JSON.stringify(feeds));
+
+});
 module.exports = router;

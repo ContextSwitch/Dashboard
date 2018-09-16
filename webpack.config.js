@@ -1,4 +1,6 @@
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   module: {
     rules: [
@@ -8,6 +10,13 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+
+      {
+        test: /\.(css|sass|scss)$/,
+        use: ExtractTextPlugin.extract({
+          use: ['raw-loader', 'sass-loader'],
+        })
       },
       {
         test: /\.html$/,
@@ -23,6 +32,11 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
+    }),
+    new ExtractTextPlugin({ 
+	filename: './main.css', 
+	disable: false, 
+	allChunks: true 
     })
   ]
 };
