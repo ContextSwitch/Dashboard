@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import RSS from "../presentational/RSS";
+import "../../../scss/dashboard.scss";
+
 class RssContainer extends Component {
   constructor() {
     super();
-    this.initialize();
     this.state = {
-      seo_title: ""
+      feeds: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -15,27 +16,28 @@ class RssContainer extends Component {
   }
   render() {
 
+    const { feeds} = this.state;
 
-    const { seo_title } = this.state;
-    return (
-      <form id="article-form">
+    let feedList = feeds.map(function(feed){
+	return <form id="article-form">
         <RSS
-          text="SEO title"
-          label="seo_title"
+          text="Feed Url"
+          label="feedUrl"
           type="text"
-          id="seo_title"
-          value={seo_title}
-          handleChange={this.handleChange}
+          id="feedUrl"
+          value={feed.feedUrl}
         />
       </form>
-    );
+    })
+
+    return <div>{feedList}</div>
   }
-  initialize() {
-    let feeds = fetch('http://54.210.221.137:8000/getFeed?feedId=1').then( results => {
-	console.log('results = ');
-	console.log(results);
-	return results;
-    });
+  componentDidMount() {
+    	fetch('http://54.210.221.137:8000/getAllFeeds')
+	.then( results => results.json())
+	.then(data => {
+	    this.setState({feeds:data});
+        });
   }
 }
 export default RssContainer;
