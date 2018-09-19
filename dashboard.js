@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path');
 const app = express();
-const routes = require('./controllers');
+const routes = require('./routes');
 const staticAssetsPath = path.resolve(__dirname, 'build');
 require('./models');
 

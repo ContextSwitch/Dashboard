@@ -1,11 +1,27 @@
 var Db = require('../models/Db.js'); 
+var parseString = require('xml2js').parseString;
+
 
 class Feed{
-  constructor(data) {
-	this.feedId = data.feedId;
-	this.feedUrl = data.feedUrl;
-	this.cache = data.cache;
-  }
+    constructor(data) {
+        this.feedId = data.feedId;
+        this.feedUrl = data.feedUrl;
+        this.feedName = data.feedName;
+        this.rawxml = data.content;
+        this.content;
+    }
+
+    async parseContent(){
+        var $this = this;
+
+        let content = await parseString(this.rawxml, function (err, result) {
+            if(typeof result == "undefined"){
+                result = {};
+            }
+            $this.content = result;
+        });
+
+    }
 }
 
 
@@ -17,7 +33,10 @@ let FeedFactory = {
 	let response = [];
 
 	for(i in result){
-	    response[i] = new Feed(result[i]);
+	    let feed = new Feed(result[i]);
+	    await feed.parseContent();
+	    response[i] = feed;
+	    
 	}
 
 	return response;	
@@ -32,6 +51,7 @@ let FeedFactory = {
 	return response;	
 	
     }
+
 }
 
 module.exports = FeedFactory;
