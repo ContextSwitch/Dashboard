@@ -1,40 +1,38 @@
 const router = require('express').Router();
-FeedFactory = require('../models/Feed.js');
-//const user = require('./user');
-//const admin = require('./admin'); 
+DocumentFactory = require('../models/Document.js');
 
 
 router.get('/', (req, res) => {
     res.send('Welcome to the dashboard API');
 });
 
-router.get('/getFeed', async (req, res) => {
+router.get('/getDocument', async (req, res) => {
 
-    let feedId = req.query.feedId;
-    let feed = await FeedFactory.load(feedId);
+    let documentId = req.query.documentId;
+    let doc= await DocumentFactory.load(documentId);
 
-    res.send(JSON.stringify(feed));
-
-});
-
-router.get('/getAllFeeds', async (req, res) => {
-
-    let feeds = await FeedFactory.loadAll();
-
-
-    res.send(JSON.stringify(feeds));
+    res.send(JSON.stringify(doc));
 
 });
 
-router.get('/getFeedContent', async (req, res) => {
-    let feedId = req.query.feedId;
-    let feed = await FeedFactory.load(feedId);
+router.get('/getAllDocuments', async (req, res) => {
+
+    let docs = await DocumentFactory.loadAll();
+
+
+    res.send(JSON.stringify(docs));
+
+});
+
+router.get('/getDocumentContent', async (req, res) => {
+    let documentId = req.query.documentId;
+    let doc = await DocumentFactory.load(documentId);
    
-    feed.fetchContent();
-    console.log(feed.content);
+    doc.fetchContent();
+    console.log(doc.content);
    
 
-    res.send(JSON.stringify(feed));
+    res.send(JSON.stringify(doc));
 });
 
 module.exports = router;
