@@ -1,3 +1,2 @@
-import FormContainer from "./js/components/container/FormContainer";
-import RssContainer from "./js/components/container/RssContainer";
-
+import RssContainer from "./js/components/container/DocumentContainer";
+import SearchContainer from "./js/components/container/SearchContainer";

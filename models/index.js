@@ -1,1 +1,1 @@
-require('./Feed');
+require('./Document');
