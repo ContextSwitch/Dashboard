@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const Item = ({ title, url}) => (
     <div className="item-container">
         <div className="item-name">
-            <a href={url}> {title} </a>
+            <a href={url} target="_:blank"><i class="fas fa-external-link-alt"></i> {title} </a>
         </div>
     </div>
 );

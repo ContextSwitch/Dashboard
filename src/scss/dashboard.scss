@@ -1,14 +1,48 @@
+$color-yellow: #FFF8F0;
+
+
 body{
     background-image: url("/images/teal-background.jpg");
 }
 
-a{
-    color:#FFF;
+a, a:not([href]):not([tabindex]){
+    color: $color-yellow;
 }
 
-.feed{
+.section{
     border-style:solid;
-    margin-left: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
     background-color: #8da49e;
     padding: 20px;
+}
+
+.search-container{
+
+    input{
+        display:inline;
+        max-width:100%;
+        width:92%;
+        background-color: #f7e48b;
+        background-color: $color-yellow;
+    }
+
+    button{
+        display:inline;
+        width: 100px;
+        height: 39px;
+        margin-left: 6px;
+    }
+
+}
+
+/* desktop */
+@media (min-width: 992px){
+    .container-layout{
+        margin-left: 10%;
+    }
+
+    .search{
+        max-width:76%;
+    }
 }
