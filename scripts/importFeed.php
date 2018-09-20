@@ -12,14 +12,14 @@ if (!$link) {
     exit;
 }
 
-$sql = "select feedName, feedUrl from feed where feedId = $feedId";
+$sql = "select documentName, documentUrl from document where documentId = $feedId";
 
 $result = mysqli_query($link, $sql);
 
 $response = mysqli_fetch_assoc($result);
 var_dump($response);
 
-$feedUrl = $response['feedUrl'];
+$feedUrl = $response['documentUrl'];
 
 $feed = get_web_page($feedUrl);
 $feed = $feed['content'];
@@ -28,7 +28,7 @@ $feed = $feed['content'];
 
 $feed = $link->real_escape_string($feed);
 
-$sql = "update feed set content = \"$feed\" where feedId = $feedId";
+$sql = "update document set content = \"$feed\" where documentId = $feedId";
 
 $result = mysqli_query($link, $sql);
 
