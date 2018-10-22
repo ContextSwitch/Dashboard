@@ -30,7 +30,14 @@ router.get('/getDocumentContent', async (req, res) => {
    
     doc.fetchContent();
     console.log(doc.content);
-   
+
+    res.send(JSON.stringify(doc));
+});
+
+router.put('/addItem', async (req, res) => {
+    
+    let doc = DocumentFactory.create(req.body);
+    doc.save();
 
     res.send(JSON.stringify(doc));
 });

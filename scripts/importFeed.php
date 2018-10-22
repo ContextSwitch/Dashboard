@@ -1,7 +1,5 @@
 <?php
 
-$feedId = $argv[1];
-
 
 $link = mysqli_connect("127.0.0.1", "root", "StormCloud3", "dashboard");
 
@@ -12,29 +10,38 @@ if (!$link) {
     exit;
 }
 
-$sql = "select documentName, documentUrl from document where documentId = $feedId";
 
-$result = mysqli_query($link, $sql);
+$sql = "select documentId from document where documentType IN ('rss', 'atom')";
+$allFeeds = mysqli_query($link, $sql);
+    //var_dump(mysqli_error($link));
 
-$response = mysqli_fetch_assoc($result);
-var_dump($response);
+while($document = mysqli_fetch_assoc($allFeeds)){
+    
+    $feedId = $document['documentId'];
 
-$feedUrl = $response['documentUrl'];
+    $sql = "select documentName, documentUrl from document where documentId = $feedId";
 
-$feed = get_web_page($feedUrl);
-$feed = $feed['content'];
+    $result = mysqli_query($link, $sql);
 
-//var_dump($feed);
+    $response = mysqli_fetch_assoc($result);
+    //var_dump($response);
 
-$feed = $link->real_escape_string($feed);
+    $feedUrl = $response['documentUrl'];
 
-$sql = "update document set content = \"$feed\" where documentId = $feedId";
+    $feed = get_web_page($feedUrl);
+    $feed = $feed['content'];
 
-$result = mysqli_query($link, $sql);
+    //var_dump($feed);
 
-var_dump(mysqli_error($link));
+    $feed = $link->real_escape_string($feed);
 
+    $sql = "update document set content = \"$feed\" where documentId = $feedId";
 
+    $result = mysqli_query($link, $sql);
+
+    //var_dump(mysqli_error($link));
+
+}
 
 
  function get_web_page( $url )

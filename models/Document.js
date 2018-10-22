@@ -1,4 +1,5 @@
 var Db = require('../models/Db.js'); 
+var ItemFactory = require('../models/Item.js');
 var parseString = require('xml2js').parseString;
 
 
@@ -24,19 +25,16 @@ class Document{
     }
     
     async loadItems(){
-        let sql = 'select * from item where documentId = ' + this.documentId;
+        let sql = 'select * from item where active = 1 and documentId = ' + this.documentId;
         let result = await Db.query(sql);
 
+        let items = await ItemFactory.loadForDocument(this.documentId);
 
-        let content = [];
+        this.content = items;
+    }
 
-        for(let i in result){
-            
-            content[i] = result[i];
-
-        }
-
-        this.content = content;
+    save(){
+    
     }
 }
 
@@ -44,7 +42,7 @@ class Document{
 let DocumentFactory = {
 
     loadAll: async () => {
-        let sql = 'select * from document';
+        let sql = 'select * from document where active = 1';
         let result = await Db.query(sql);
         let response = [];
 

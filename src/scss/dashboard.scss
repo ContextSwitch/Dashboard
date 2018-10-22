@@ -17,6 +17,16 @@ a, a:not([href]):not([tabindex]){
     padding: 20px;
 }
 
+.add-item-container{
+        border: 1px solid;
+        padding: 15px;
+        margin-top: 20px;
+
+        input{
+            margin-bottom: 5px;
+        }
+}
+
 .search-container{
 
     input{

@@ -11,6 +11,13 @@ a, a:not([href]):not([tabindex]) {
   background-color: #8da49e;
   padding: 20px; }
 
+.add-item-container {
+  border: 1px solid;
+  padding: 15px;
+  margin-top: 20px; }
+  .add-item-container input {
+    margin-bottom: 5px; }
+
 .search-container input {
   display: inline;
   max-width: 100%;
