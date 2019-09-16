@@ -9,7 +9,7 @@ require('./models');
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://54.210.221.137');
+    res.setHeader('Access-Control-Allow-Origin', 'http://34.234.76.185');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

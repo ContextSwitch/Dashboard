@@ -2,7 +2,7 @@ var mysql = require('mysql');
 
 var db_config = {
   host: "localhost",
-  user: "root",
+  user: "dashboard_user",
   password: "StormCloud3",
   database: 'dashboard'
 };

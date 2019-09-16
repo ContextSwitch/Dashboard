@@ -19,7 +19,7 @@ router.get('/getAllDocuments', async (req, res) => {
 
     let docs = await DocumentFactory.loadAll();
 
-
+    res.type('json');
     res.send(JSON.stringify(docs));
 
 });

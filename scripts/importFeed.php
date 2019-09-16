@@ -1,7 +1,7 @@
 <?php
 
 
-$link = mysqli_connect("127.0.0.1", "root", "StormCloud3", "dashboard");
+$link = mysqli_connect("127.0.0.1", "dashboard_user", "StormCloud3", "dashboard");
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -19,14 +19,14 @@ while($document = mysqli_fetch_assoc($allFeeds)){
     
     $feedId = $document['documentId'];
 
-    $sql = "select documentName, documentUrl from document where documentId = $feedId";
+    $sql = "select documentName, documentFeedUrl from document where documentId = $feedId";
 
     $result = mysqli_query($link, $sql);
 
     $response = mysqli_fetch_assoc($result);
     //var_dump($response);
 
-    $feedUrl = $response['documentUrl'];
+    $feedUrl = $response['documentFeedUrl'];
 
     $feed = get_web_page($feedUrl);
     $feed = $feed['content'];

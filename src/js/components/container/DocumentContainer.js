@@ -121,7 +121,7 @@ class DocumentContainer extends Component {
         return itemList;
     }
   componentDidMount() {
-    	fetch('http://54.210.221.137:8000/getAllDocuments')
+    	fetch('http://34.234.76.185:8000/getAllDocuments')
 	.then( results => results.json())
 	.then(data => {
 	    this.setState({documents:data});
