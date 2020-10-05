@@ -17,7 +17,7 @@ class Item{
 let ItemFactory = {
 
     async loadForDocument(documentId){
-        let sql = 'select * from item where documentId = ' + documentId;
+        let sql = 'select * from item where active = 1 and documentId = ' + documentId;
         let result = await Db.query(sql);
 
         let response = [];
